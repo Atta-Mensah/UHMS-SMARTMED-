@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pharmacology MCQs - Anti-ulcer Drugs & GI Pharmacology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
+        
+        /* Hide Scrollbar but keep functionality */
+        .sidebar-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .sidebar-scroll::-webkit-scrollbar { display: none; }
+        
+        /* Card Hover Effects */
+        .option-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); touch-action: manipulation; }
+        .option-card:active { transform: scale(0.98); }
+        .option-card:hover { transform: translateY(-1px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        
+        /* Answer States */
+        .correct-answer { background-color: #ecfdf5 !important; border-color: #10b981 !important; color: #065f46; }
+        .wrong-answer { background-color: #fef2f2 !important; border-color: #ef4444 !important; color: #991b1b; }
+        .selected-neutral { background-color: #eff6ff; border-color: #3b82f6; box-shadow: 0 0 0 2px #3b82f6; }
+        
+        /* Tabs */
+        .tab-active { background-color: #4f46e5; color: white; box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); }
+        .tab-inactive { background-color: white; color: #4b5563; border: 1px solid #e5e7eb; }
+        
+        /* Typography & Layout */
+        .explanation-text { line-height: 1.6; font-size: 0.95rem; }
+        .explanation-text p { margin-bottom: 0.5rem; }
+        
+        /* Animation */
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Typing Indicator */
+        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        /* Markdown-lite styling for AI response */
+        .ai-response ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 0.5rem; }
+        .ai-response strong { font-weight: 700; color: #374151; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 640px) {
+            .option-card { padding: 1rem; }
+            #main-content { padding-bottom: 80px; }
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden text-slate-800">
+
+    <!-- MAIN APP -->
+    <div id="app-container" class="flex flex-col h-full">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-700 via-indigo-600 to-indigo-700 shadow-md z-30 flex-none h-16 flex items-center justify-between px-3 lg:px-8 text-white">
+            <div class="flex items-center gap-3">
+                <button id="menu-btn" class="lg:hidden text-white/90 hover:text-white p-2 rounded-md hover:bg-white/10 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <div class="flex flex-col overflow-hidden">
+                    <h1 class="text-sm md:text-lg font-bold tracking-tight text-white truncate leading-tight">GI Pharmacology MCQs</h1>
+                    <span class="text-[10px] md:text-xs text-indigo-200 font-medium truncate max-w-[120px] md:max-w-xs block">Anti-ulcer & GI Drugs</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 md:gap-4">
+                <div class="flex items-center gap-1 bg-black/20 p-1 rounded-lg backdrop-blur-sm">
+                    <button id="mode-practice" class="px-3 py-1.5 rounded text-xs md:text-sm font-semibold shadow-sm transition-all bg-white text-indigo-700">Practice</button>
+                    <button id="mode-exam" class="px-3 py-1.5 rounded text-xs md:text-sm font-semibold transition-all text-indigo-100 hover:text-white hover:bg-white/10">Exam</button>
+                </div>
+
+                <button id="submit-btn" class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-3 md:px-5 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold shadow-lg transition-all flex items-center gap-2">
+                    <i class="fas fa-check"></i> <span id="submit-btn-text">Finish</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="flex-1 flex overflow-hidden relative">
+            
+            <!-- Sidebar Navigation -->
+            <aside id="sidebar" class="absolute lg:relative w-72 h-full bg-white border-r border-slate-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-20 flex flex-col shadow-2xl lg:shadow-none">
+                <div class="p-4 border-b border-slate-100 bg-slate-50/80 flex justify-between items-center">
+                    <span class="font-bold text-slate-700 flex items-center gap-2 text-sm">
+                        <i class="fas fa-th-large text-indigo-500"></i> Navigator
+                    </span>
+                    <span id="progress-text" class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-0.5 rounded-full border border-indigo-200">0/79</span>
+                </div>
+                <div class="flex-1 overflow-y-auto sidebar-scroll p-3 bg-slate-50/30">
+                    <div id="question-grid" class="grid grid-cols-5 gap-2">
+                        <!-- Grid items generated by JS -->
+                    </div>
+                </div>
+                <div class="p-3 border-t border-slate-200 bg-white text-[10px] md:text-xs font-medium text-slate-500 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div> Correct</div>
+                        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-rose-500"></div> Wrong</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div> Answered</div>
+                        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full border border-slate-300 bg-white"></div> Unanswered</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Overlay for mobile sidebar -->
+            <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-10 hidden lg:hidden transition-opacity"></div>
+
+            <!-- Content Area -->
+            <main class="flex-1 overflow-y-auto bg-slate-100/50 flex flex-col items-center relative w-full" id="main-content">
+                
+                <div class="w-full max-w-4xl p-4 md:p-6 lg:p-8 pb-24">
+                    
+                    <!-- Topic Tabs -->
+                    <div class="mb-6 overflow-x-auto whitespace-nowrap pb-2 sidebar-scroll">
+                        <div id="topic-tabs" class="inline-flex gap-2 px-1">
+                            <!-- Tabs generated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Question Card -->
+                    <div class="bg-white rounded-xl md:rounded-2xl shadow-sm border border-slate-200 overflow-hidden relative transition-all duration-300">
+                        <!-- Reset Button (Practice Mode Only) -->
+                        <button id="reset-q-btn" class="absolute top-3 right-3 md:top-6 md:right-6 text-slate-400 hover:text-blue-600 hover:bg-blue-50 p-2 rounded-full transition-all hidden z-10" title="Reset Question">
+                            <i class="fas fa-redo-alt text-lg"></i>
+                        </button>
+
+                        <div class="p-5 md:p-8">
+                            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 mb-4 md:mb-6">
+                                <span class="self-start text-[10px] font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 rounded-full px-2 py-1 md:px-3" id="topic-badge">
+                                    Topic
+                                </span>
+                                <span class="text-xs md:text-sm font-semibold text-slate-400">Question <span id="q-number" class="text-slate-700">1</span> of <span id="q-total">79</span></span>
+                            </div>
+                            
+                            <h2 id="q-text" class="text-lg md:text-xl font-semibold text-slate-800 leading-snug md:leading-normal mb-6">
+                                <!-- Question text goes here -->
+                            </h2>
+
+                            <!-- Image Placeholder -->
+                            <div id="q-image-container" class="hidden mb-6 p-6 bg-slate-50 rounded-xl flex flex-col items-center justify-center text-slate-400 border-2 border-dashed border-slate-200">
+                                <i class="fas fa-image text-4xl mb-2 text-slate-300"></i>
+                                <span class="text-xs md:text-sm font-medium">Image Reference Available in Source</span>
+                            </div>
+
+                            <div id="options-container" class="space-y-3">
+                                <!-- Options generated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Explanation Section -->
+                        <div id="explanation-box" class="hidden border-t border-indigo-50 bg-indigo-50/40 p-5 md:p-8 relative">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center gap-2 text-indigo-700 font-bold text-sm md:text-base">
+                                    <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center">
+                                        <i class="fas fa-lightbulb text-indigo-600 text-xs"></i>
+                                    </div>
+                                    <span>Explanation</span>
+                                </div>
+                                <button onclick="openAiTutor()" class="bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md transition-all flex items-center gap-1.5 transform hover:scale-105">
+                                    <i class="fas fa-sparkles"></i> AI Tutor
+                                </button>
+                            </div>
+                            <div id="explanation-text" class="text-slate-700 leading-relaxed explanation-text"></div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <button id="prev-btn" class="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fas fa-arrow-left text-sm"></i> <span class="font-semibold text-sm md:text-base">Previous</span>
+                        </button>
+                        <button id="next-btn" class="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 shadow-lg shadow-indigo-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span class="font-semibold text-sm md:text-base">Next</span> <i class="fas fa-arrow-right text-sm"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Score Modal -->
+    <div id="score-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4 transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 md:p-8 text-center border border-white/20 transform transition-all scale-100">
+            <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                <i class="fas fa-clipboard-check text-4xl text-indigo-600"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-800 mb-1">Session Complete</h2>
+            <p class="text-slate-500 mb-6 text-sm">Review your performance below.</p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div class="text-center">
+                    <div id="score-percent" class="text-2xl md:text-3xl font-black text-slate-900">0%</div>
+                    <div class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Total Score</div>
+                </div>
+                <div class="text-center border-l border-slate-200">
+                    <div id="score-fraction" class="text-2xl md:text-3xl font-black text-slate-900">0/0</div>
+                    <div class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Questions</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <button onclick="reviewExam()" class="w-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 py-3 rounded-lg font-bold transition-colors text-sm">
+                    Review Answers
+                </button>
+                <button onclick="location.reload()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-bold shadow-md transition-colors text-sm">
+                    Start New Session
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Tutor Modal -->
+    <div id="ai-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full flex flex-col max-h-[85vh] border border-white/20 transform transition-all scale-100 overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-sparkles text-fuchsia-500"></i>
+                    <h3 class="font-bold text-slate-800">AI Tutor</h3>
+                </div>
+                <div class="flex gap-2">
+                     <button onclick="clearApiKey()" class="text-xs text-slate-400 hover:text-red-500 underline" title="Reset API Key">Reset Key</button>
+                    <button onclick="closeAiTutor()" class="text-slate-400 hover:text-slate-600 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- API Key Setup View -->
+            <div id="ai-key-setup" class="flex-1 p-8 flex flex-col justify-center items-center text-center space-y-4 hidden">
+                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                    <i class="fas fa-key text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800">Setup AI Tutor</h3>
+                <p class="text-sm text-slate-500">To use the AI features, please enter your Google Gemini API Key.</p>
+                <input type="password" id="api-key-input" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Paste API Key here (starts with AIza...)">
+                <button onclick="saveApiKey()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold shadow-md transition-all">
+                    Save & Start
+                </button>
+                <p class="text-xs text-slate-400 mt-4">Your key is stored locally in your browser.</p>
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-xs text-indigo-500 hover:underline">Get a free key here</a>
+            </div>
+
+            <!-- Chat Area -->
+            <div id="ai-chat-interface" class="flex-1 flex flex-col overflow-hidden hidden">
+                <div id="ai-chat-content" class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+                    <!-- Messages will appear here -->
+                </div>
+
+                <!-- Quick Actions & Input -->
+                <div class="p-3 border-t border-slate-100 bg-white">
+                    <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mb-2">
+                        <button onclick="sendAiPrompt('Explain this simply like I am 5 years old')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold hover:bg-indigo-100 border border-indigo-100 transition-colors">
+                            👶 Simplify
+                        </button>
+                        <button onclick="sendAiPrompt('Give me a mnemonic to remember this answer')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-fuchsia-50 text-fuchsia-600 text-xs font-semibold hover:bg-fuchsia-100 border border-fuchsia-100 transition-colors">
+                            🧠 Mnemonic
+                        </button>
+                        <button onclick="sendAiPrompt('Why exactly is the correct answer correct and others wrong?')" class="whitespace-nowrap px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold hover:bg-emerald-100 border border-emerald-100 transition-colors">
+                            ✅ Analysis
+                        </button>
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="text" id="ai-user-input" class="w-full pl-4 pr-12 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition-all" placeholder="Ask a specific question...">
+                        <button onclick="handleAiSubmit()" class="absolute right-2 top-2 w-8 h-8 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center transition-colors shadow-sm">
+                            <i class="fas fa-paper-plane text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Injection -->
+    <script type="text/plain" id="raw-data-source">
+Pharmacology - GI Drugs
+1. Despite their short half-lives (2 hrs), proton pump inhibitors (PPIs) cause a prolonged suppression of acid secretion (up to 48 h) because: (AIIMS May 2012)
+A. They are prodrugs and undergo activation gradually
+B. They exit from the plasma and enter acid secretory canaliculi and stay there, blocking the secretion of acid for a long time
+C. They irreversibly inhibit the proton pump molecule and hence, acid secretion requires synthesis of new proton pumps
+D. They are available as enteric coated capsules, from which drug is gradually released
+● Answer: C
+● Explanation: PPIs irreversibly inhibit H+/K+ ATPase (proton pump). Since parietal cells need to synthesize new pumps, acid suppression lasts longer than the drug's plasma half-life.
+
+2. Which of the following proton pump inhibitor has enzyme inhibitory activity? (AI 2010)
+A. Rabeprazole
+B. Lansoprazole
+C. Pantoprazole
+D. Omeprazole
+● Answer: D
+● Explanation: Omeprazole inhibits CYP450 enzymes, potentially causing drug interactions, while other PPIs have minimal effects on CYP450.
+
+3. Drug not used in H. pylori is: (AIIMS May 2008)
+A. Metronidazole
+B. Omeprazole
+C. Mosapride
+D. Amoxicillin
+● Answer: C
+● Explanation: Mosapride is a prokinetic agent used for gastroparesis and GERD, not for H. pylori eradication which typically uses PPI + antibiotics.
+
+4. Which of the following drugs is not used for H. pylori treatment? (AI 2007)
+A. Oxytetracycline
+B. Bismuth compounds
+C. Amoxicillin
+D. Omeprazole
+● Answer: A
+● Explanation: Oxytetracycline is not part of standard H. pylori regimens. Common regimens include PPIs + clarithromycin/amoxicillin/metronidazole + bismuth.
+
+5. Which of the following agents is beneficial in NSAID induced gastric ulcer? (AI 2007)
+A. PGE1 agonist
+B. PGE2 agonist
+C. PGD2 agonist
+D. PGF2α agonist
+● Answer: A
+● Explanation: Misoprostol is a PGE1 analog that protects gastric mucosa by enhancing mucus/bicarbonate secretion and reducing acid secretion.
+
+6. A patient of peptic ulcer was prescribed ranitidine and sucralfate in the morning hours. Why is this combination incorrect? (AI 2004)
+A. Ranitidine combines with sucralfate and prevents its action
+B. Combination of these two drugs produces serious side effects like agranulocytosis
+C. Ranitidine increases the gastric pH so sucralfate is not able to act.
+D. Sucralfate inhibits the absorption of ranitidine
+● Answer: C
+● Explanation: Sucralfate requires acidic pH (below 4) to polymerize and form a protective barrier. Ranitidine reduces acid, preventing sucralfate activation.
+
+7. Proton pump inhibitors are most effective when they are given: (AI 2002)
+A. After meals
+B. Shortly before meals
+C. Along with H2 blockers
+D. During prolonged fasting periods
+● Answer: B
+● Explanation: PPIs are most effective when taken 30-60 minutes before a meal as active parietal cells are needed for drug activation.
+
+8. A patient is taking famotidine, sucralfate and antacid tablets. This treatment is irrational because: (AI 2000)
+A. Sucralfate decreases the absorption of famotidine
+B. Sucralfate increases the toxicity of famotidine
+C. Sucralfate decreases the absorption of antacids
+D. Sucralfate polymerizes only when gastric pH is less than 4
+● Answer: D
+● Explanation: Famotidine increases gastric pH, preventing sucralfate polymerization and reducing its effectiveness as a cytoprotective agent.
+
+9. Gynaecomastia can occur as a side effect of:
+A. Bromocriptine
+B. Cimetidine
+C. Famotidine
+D. Levodopa
+● Answer: B
+● Explanation: Cimetidine has anti-androgenic effects and can cause gynecomastia, decreased libido, and impotence due to its binding to androgen receptors.
+
+10. Choose the correct statement about H2 receptor blockers:
+A. They are the most efficacious drugs in inhibiting gastric acid secretion
+B. They cause faster healing of duodenal ulcers
+C. They prevent stress ulcers in the stomach
+D. They afford the most prompt relief of ulcer pain
+● Answer: C
+● Explanation: H2 blockers like ranitidine are effective in preventing stress ulcers in critically ill patients by reducing acid secretion.
+
+11. Ranitidine differs from cimetidine in the following respect:
+A. It is less potent
+B. It is shorter acting
+C. It does not have anti-androgenic action
+D. It produces more CNS side effects
+● Answer: C
+● Explanation: Ranitidine lacks the anti-androgenic effects of cimetidine and has fewer drug interactions since it doesn't inhibit CYP450 significantly.
+
+12. The most efficacious drug for inhibiting round the clock gastric acid output is:
+A. Omeprazole
+B. Cimetidine
+C. Pirenzepine
+D. Misoprostol
+● Answer: A
+● Explanation: PPIs like omeprazole provide the most profound and prolonged acid suppression compared to H2 blockers, anticholinergics, or prostaglandins.
+
+13. In peptic ulcer, antacids are now primarily used for:
+A. Prompt pain relief
+B. Ulcer healing
+C. Preventing ulcer relapse
+D. Control of bleeding from the ulcer
+● Answer: A
+● Explanation: Antacids provide rapid symptomatic relief but are not first-line for healing ulcers; PPIs and H2 blockers are preferred for healing.
+
+14. The following anti ulcer drug DOES NOT act by reducing the secretion of or neutralizing gastric acid:
+A. Magaldrate
+B. Sucralfate
+C. Misoprostol
+D. Omeprazole
+● Answer: B
+● Explanation: Sucralfate is a cytoprotective agent that forms a protective barrier over ulcers; it doesn't reduce or neutralize acid.
+
+15. Choose the correct statement about colloidal bismuth subcitrate:
+A. It causes prolonged neutralization of gastric acid
+B. It has anti H. pylori activity
+C. It relieves peptic ulcer pain promptly
+D. All of the above are correct
+● Answer: B
+● Explanation: Bismuth compounds have direct antibacterial activity against H. pylori and are used in eradication regimens.
+
+16. The drugs employed for anti-H. pylori therapy include all of the following EXCEPT:
+A. Ciprofloxacin
+B. Clarithromycin
+C. Tinidazole
+D. Amoxicillin
+● Answer: A
+● Explanation: Ciprofloxacin is not typically used in H. pylori regimens; standard antibiotics include clarithromycin, amoxicillin, metronidazole/tinidazole.
+
+17. The following is true of anti-H. pylori therapy EXCEPT:
+A. It is indicated in all patients of peptic ulcer
+B. Resistance to any single antimicrobial drug develops rapidly
+C. Concurrent suppression of gastric acid enhances the efficacy of the regimen
+D. Colloidal bismuth directly inhibits H. pylori but has poor patient acceptability
+● Answer: A
+● Explanation: H. pylori eradication is not indicated in all peptic ulcer patients; it's mainly for H. pylori-positive ulcers, MALT lymphoma, etc.
+
+18. Drug of choice for the treatment of peptic ulcer caused due to chronic use of NSAIDs is:
+A. Pirenzepine
+B. Loxatidine
+C. Misoprostol
+D. Esomeprazole
+● Answer: D
+● Explanation: PPIs like esomeprazole are first-line for NSAID-induced ulcers as they provide superior acid suppression and ulcer healing.
+
+19. Most specific drug for the treatment of peptic ulcer disease due to chronic use of aspirin is:
+A. Omeprazole
+B. Misoprostol
+C. Pirenzepine
+D. Ranitidine
+● Answer: B
+● Explanation: Misoprostol (PGE1 analog) specifically replaces prostaglandins depleted by NSAIDs, offering mucosal protection.
+
+20. M1 blocker used in peptic ulcer disease is:
+A. Pirenzepine
+B. Pyridostigmine
+C. Atropine
+D. Oxybutynin
+● Answer: A
+● Explanation: Pirenzepine selectively blocks M1 muscarinic receptors on parietal cells, reducing acid secretion with fewer anticholinergic side effects.
+
+21. Choose the antiulcer drug that inhibits gastric acid secretion, stimulates gastric mucus and bicarbonate secretion and has cytoprotective action on gastric mucosa:
+A. Misoprostol
+B. Sucralfate
+C. Carbenoxolone sodium
+D. Colloidal bismuth subcitrate
+● Answer: A
+● Explanation: Misoprostol reduces acid secretion while enhancing mucosal defense via increased mucus/bicarbonate production.
+
+22. Antacid combinations of magnesium and aluminium salts are superior to single component preparations because:
+A. They have rapid as well as sustained acid neutralizing action
+B. They are less likely to affect gastric emptying
+C. They are less likely to alter bowel movement
+D. All of the above
+● Answer: D
+● Explanation: Mg salts cause diarrhea, Al salts cause constipation; combining them balances bowel effects and provides rapid/sustained neutralization.
+
+23. Cimetidine inhibits the metabolism of all of the following drugs EXCEPT: (DPG 1997)
+A. Phenytoin
+B. Warfarin
+C. Ketoconazole
+D. Diazepam
+● Answer: C
+● Explanation: Cimetidine inhibits CYP450, increasing levels of phenytoin, warfarin, diazepam. Ketoconazole absorption is reduced (needs acidic pH).
+
+24. Drug used in the treatment of gastric ulcer due to H. pylori is: (TN 2006)
+A. Anticholinergics
+B. Carbenoxolone sodium
+C. Bismuth subcitrate
+D. Corticosteroid
+● Answer: C
+● Explanation: Bismuth compounds are part of H. pylori eradication regimens due to direct antibacterial effects.
+
+25. Which one of the following is not an antacid?
+A. Magnesium sulfate (TN 2008)
+B. Magaldrate
+C. Magnesium carbonate
+D. Magnesium phosphate
+● Answer: A
+● Explanation: Magnesium sulfate (Epsom salt) is a saline laxative, not an antacid used for acid neutralization.
+
+26. NSAID induced ulcer are treated by: (RJ 2005)
+A. Antacids
+B. H2 blockers
+C. Misoprostol
+D. PPI (proton pump inhibitors)
+● Answer: D
+● Explanation: PPIs are first-line for treating and preventing NSAID-induced ulcers due to superior acid suppression.
+
+27. Which of the following is not the effect of ranitidine as compared to cimetidine? (MH 2003)
+A. Action on H2 receptors
+B. Given orally
+C. Used with proton pump blockers
+D. Anti-androgenic action
+● Answer: D
+● Explanation: Ranitidine lacks the anti-androgenic effects that cimetidine has due to different chemical structure.
+
+28. Esomeprazole acts by inhibiting: (MH 2005)
+A. H+K+ ATPase pump
+B. H+Na+ ATPase pump
+C. H+ pump
+D. Any of the above
+● Answer: A
+● Explanation: Esomeprazole is a PPI that irreversibly inhibits H+/K+ ATPase (proton pump) in parietal cells.
+
+29. Anti-peptic ulcer drug that can be given in patients with chronic renal failure (CRF) (MH 2005)
+A. Aluminium Hydroxide
+B. Magnesium Hydroxide
+C. Sucralfate
+D. None
+● Answer: A
+● Explanation: Aluminium hydroxide is safe in renal failure; magnesium-containing antacids are contraindicated (risk of hypermagnesemia).
+
+30. Antacid drug that typically causes diarrhea?
+A. Sodium bicarbonate (MH 2007)
+B. Magnesium hydroxide
+C. Calcium bicarbonate
+D. Aluminium hydroxide
+● Answer: B
+● Explanation: Magnesium salts (hydroxide, carbonate) have osmotic laxative effects causing diarrhea.
+
+31. The inhibition of hydrochloric acid (HCl) secretion by omeprazole occurs within an hour, reaches a peak at 2 hours, and plateaus by 4th day. After how many days will the secretion gradually normalize:
+A. < 24 hours (MH 2008)
+B. 1-2 days
+C. 3-5 days
+D. 6-10 days
+● Answer: C
+● Explanation: After stopping omeprazole, acid secretion normalizes in 3-5 days as new proton pumps are synthesized.
+
+32. All are H2 blocker except: (Jharkhand 2003, 2004)
+A. Omeprazole
+B. Cimetidine
+C. Famotidine
+D. Ranitidine
+● Answer: A
+● Explanation: Omeprazole is a PPI, not an H2 receptor blocker.
+
+33. The following appears to affect the integrity of the adherent gel of sucralfate interfering with its action:
+A. Antacids (TN 1991) (AP 2001)
+B. Food
+C. Mucin
+D. Proteins in foodstuffs
+● Answer: A
+● Explanation: Antacids increase gastric pH, preventing sucralfate polymerization and reducing its protective action.
+
+34. A patient presents with Zollinger-Ellison syndrome due to gastrinoma. He has two bleeding ulcers and diarrhoea. A drug that irreversibly inhibits the H+/K+ ATPase in gastric parietal cells is:
+A. Cimetidine (Karnataka 2007)
+B. Cisapride
+C. Glycopyrrolate
+D. Omeprazole
+● Answer: D
+● Explanation: PPIs like omeprazole are first-line for Zollinger-Ellison syndrome due to profound acid suppression.
+
+35. Which of the following is an antagonist of a peptide and is used to reduce chemotherapy induced nausea and vomiting?
+A. Atrial natriuretic peptide
+B. Aprepitant
+C. Bradykinin
+D. Enalapril
+● Answer: B
+● Explanation: Aprepitant is an NK1 receptor antagonist used for chemotherapy-induced nausea/vomiting.
+
+36. Drug given for metoclopramide induced dystonic reaction is: (MPPG 2002)
+A. Pheniramine
+B. Promethazine
+C. Chlorpromazine
+D. Prochlorperazine
+● Answer: B
+● Explanation: Promethazine (antihistamine with anticholinergic properties) treats extrapyramidal symptoms from metoclopramide.
+
+37. Regarding aprepitant all are true except:
+A. Agonist at NK1 receptors (AI 2011)
+B. Crosses Blood Brain Barrier
+C. Ameliorate nausea and vomiting induced by chemotherapy
+D. Metabolized by CYP450 enzymes
+● Answer: A
+● Explanation: Aprepitant is an NK1 receptor antagonist, not agonist.
+
+38. An anti-emetic drug that also decreases acid secretion due to its action on H1 receptors is:
+A. Promethazine (AI 2010)
+B. Domperidone
+C. Metoclopramide
+D. Ondansetron
+● Answer: A
+● Explanation: Promethazine (H1 antagonist) has antiemetic and mild antisecretory effects.
+
+39. Metoclopramide (DPG 2009)
+A. Inhibit cholinergic smooth muscle stimulation in the gastrointestinal tract
+B. Decrease lower esophageal sphincter pressure
+C. Stimulate D2 receptor
+D. Enhance colonic motility
+● Answer: D
+● Explanation: Metoclopramide enhances gastric and small intestinal motility but has minimal effect on colon.
+
+40. Drug implicated in prolonging QT interval is:
+A. Domperidone (AI 2004)
+B. Metoclopramide (RJ 2007)
+C. Cisapride
+D. Omeprazole
+● Answer: C
+● Explanation: Cisapride prolongs QT interval and can cause torsades de pointes, leading to restricted use.
+
+41. For chemotherapy induced vomiting, 5HT3 antagonist having maximum potency is:
+A. Ondansetron (AIIMS Nov., 2007)
+B. Granisetron
+C. Dolasetron
+D. Palonosetron
+● Answer: D
+● Explanation: Palonosetron has highest potency and longest half-life among 5-HT3 antagonists.
+
+42. Which of the following drugs is not an antiemetic?
+A. Ondansetron (AIIMS May, 2007)
+B. Domperidone
+C. Metoclopramide
+D. Cinnarizine
+● Answer: D
+● Explanation: Cinnarizine is primarily an antihistamine/vestibular suppressant for motion sickness, not a general antiemetic.
+
+43. Anti emetic action is produced through:
+A. Decreased CTZ stimulation (PGI Dec. 2002)
+B. H1 agonistic action
+C. D1 antagonistic action
+D. Olfactory apparatus stimulation
+E. 5 HT4 agonistic action
+● Answer: A
+● Explanation: Most antiemetics act by inhibiting the chemoreceptor trigger zone (CTZ) in area postrema.
+
+44. Ondansetron acts by: (PGI June, 2002)
+A. Acting on CTZ
+B. 5-HT3 antagonism
+C. D1 and D2 receptor antagonism
+D. Increasing GIT motility
+E. Blocking cholinergic receptors
+● Answer: B
+● Explanation: Ondansetron is a selective 5-HT3 receptor antagonist.
+
+45. In case of hill journey, antimotion sickness drugs are best administered at:
+A. Twelve hours before commencing journey
+B. One hour before commencing journey
+C. Immediately after commencing journey
+D. At the first feeling of motion sickness
+● Answer: B
+● Explanation: Antimotion sickness drugs should be taken prophylactically, about 1 hour before travel.
+
+46. Metoclopramide has the following actions EXCEPT:
+A. Increase lower esophageal sphincter tone
+B. Prokinetic action is blocked by atropine
+C. Increase gastric peristalsis
+D. Increase large intestinal peristalsis
+● Answer: D
+● Explanation: Metoclopramide primarily affects upper GI tract (stomach, duodenum) with minimal effect on colon.
+
+47. Which of the following prokinetic drugs produces extrapyramidal side effects?
+A. Metoclopramide
+B. Cisapride
+C. Domperidone
+D. All of the above
+● Answer: A
+● Explanation: Metoclopramide crosses BBB and can cause EPS; domperidone doesn't cross BBB significantly.
+
+48. Which antiemetic drug selectively blocks levodopa induced vomiting without blocking its antiParkinsonian action?
+A. Metoclopramide
+B. Cisapride
+C. Domperidone
+D. Ondansetron
+● Answer: C
+● Explanation: Domperidone doesn't cross BBB, so it blocks peripheral dopamine receptors (causing antiemesis) without affecting central dopaminergic pathways (parkinsonism treatment).
+
+49. The most effective antiemetic for controlling cisplatin induced vomiting is:
+A. Prochlorperazine
+B. Ondansetron
+C. Metoclopramide
+D. Aprepitant
+● Answer: D
+● Explanation: Aprepitant (NK1 antagonist) combined with 5-HT3 antagonist and dexamethasone is most effective for cisplatin-induced vomiting.
+
+50. Activation of the following type of receptors present on myenteric neurons by metoclopramide is primarily responsible for the enhanced acetylcholine release and improving gastric motility:
+A. Muscarinic M1
+B. Serotonergic 5-HT3
+C. Serotonergic 5-HT4
+D. Dopaminergic D2
+● Answer: C
+● Explanation: Metoclopramide's prokinetic effect is via 5-HT4 agonism (enhancing ACh release) and D2 antagonism.
+
+51. Which of the following prokinetic drugs has been implicated in causing serious ventricular arrhythmias, particularly in patients concurrently receiving erythromycin or ketoconazole?
+A. Domperidone
+B. Cisapride
+C. Mosapride
+D. Metoclopramide
+● Answer: B
+● Explanation: Cisapride prolongs QT interval; CYP3A4 inhibitors (erythromycin, ketoconazole) increase cisapride levels, raising arrhythmia risk.
+
+52. Indicate the drug which does not improve lower esophageal sphincter tone or prevent gastroesophageal reflux, but is used as the first line treatment of gastroesophageal reflux disease:
+A. Sodium alginate + aluminium hydroxide gel
+B. Omeprazole
+C. Mosapride
+D. Metoclopramide
+● Answer: B
+● Explanation: PPIs like omeprazole reduce acid but don't increase LES tone; they're first-line for GERD due to acid suppression.
+
+53. A patient on cisplatin therapy develops intractable vomiting on the third day of treatment. Agent of choice for controlling this vomiting is:
+A. Aprepitant
+B. Ondansetron
+C. Metoclopramide
+D. Prochlorperazine
+● Answer: A
+● Explanation: Delayed vomiting (after 24 hours) with cisplatin responds best to aprepitant (NK1 antagonist).
+
+54. Ondansetron acts by inhibiting which of the following receptors?
+A. 5-HT1 (RJ 2006, 2005)
+B. 5-HT2 (TN 2002, Jhankhand 2004, 2005)
+C. 5-HT3
+D. 5-HT4
+● Answer: C
+● Explanation: Ondansetron is a selective 5-HT3 receptor antagonist.
+
+55. Drug stimulating 5HT4 receptors to act as prokinetic agents are all of the following Except:
+A. Renzapride (MH 2006)
+B. Metoclopramide
+C. Domperidone
+D. Cisapride
+● Answer: C
+● Explanation: Domperidone is a D2 antagonist, not a 5-HT4 agonist.
+
+56. Which of the following drugs is not used for motion sickness: (Kolkata 2007)
+A. Metoclopramide
+B. Cyclizine
+C. Cinnarizine
+D. Scopolamine
+● Answer: A
+● Explanation: Metoclopramide is ineffective for motion sickness; vestibular suppressants (antihistamines, anticholinergics) are used.
+
+57. Drug used in irritable bowel syndrome with constipation is: (AI 2012)
+A. Lubiprostone
+B. Loperamide
+C. Alosetron
+D. Clonidine
+● Answer: A
+● Explanation: Lubiprostone (chloride channel activator) is approved for IBS-C.
+
+58. Which of the following statements about octreotide is true? (AIIMS Nov. 2011)
+A. Stimulates growth hormone
+B. Used in secretory diarrhea
+C. Used orally
+D. Contraindicated in acromegaly
+● Answer: B
+● Explanation: Octreotide (somatostatin analog) reduces intestinal secretion and is used for secretory diarrhea, carcinoid syndrome, etc.
+
+59. Which of the following agents are useful in medical treatment of variceal bleeding? (AI 2011)
+A. Octreotide
+B. Pantoprazole
+C. Somatotropin
+D. Dexamethasone
+● Answer: A
+● Explanation: Octreotide reduces portal pressure and is used for variceal bleeding along with endoscopic therapy.
+
+60. Which of the following laxatives lowers blood ammonia level in hepatic encephalopathy?
+A. Bisacodyl
+B. Liquid paraffin
+C. Lactulose
+D. Magnesium sulfate
+● Answer: C
+● Explanation: Lactulose acidifies colon, trapping NH3 as NH4+ which is excreted, reducing blood ammonia.
+
+61. Stimulant purgatives are contraindicated in the following:
+A. Bed ridden patients
+B. Before abdominal radiography
+C. Subacute intestinal obstruction
+D. All of these
+● Answer: C
+● Explanation: Stimulant laxatives can worsen obstruction; they're contraindicated in intestinal obstruction.
+
+62. The success of oral rehydration therapy of diarrhea depends upon which of the following processes in the intestinal mucosa?
+A. Sodium pump mediated Na+ absorption
+B. Glucose coupled Na+ absorption
+C. Bicarbonate coupled Na+ absorption
+D. Passive Na+ diffusion secondary to nutrient absorption
+● Answer: B
+● Explanation: ORS uses glucose-facilitated sodium absorption (SGLT1 transporter) even during diarrhea.
+
+63. The concentration of sodium ions in the standard WHO oral rehydration solution is:
+A. 40 m moles/L
+B. 60 m moles/L
+C. 90 m moles/L
+D. 110 m moles/L
+● Answer: C
+● Explanation: Standard WHO ORS has 90 mmol/L sodium; low-osmolarity ORS has 75 mmol/L.
+
+64. The new formula WHO-ORS differs from the older standard formula WHO-ORS in the following respect:
+A. It has lower Na+ and glucose concentration
+B. It has higher K+ concentration
+C. It has no basic salt
+D. Both (b) and (c) are correct
+● Answer: A
+● Explanation: Low-osmolarity ORS (2002) has lower Na+ (75 vs 90) and glucose (75 vs 111) concentrations.
+
+65. Which of the following statements is true about new formula WHO-ORS?
+A. It has Na+ ion concentration of 75 mM/L
+B. Its glucose concentration is 75 mM/L
+C. Its total osmolarity is 245 mOsm/L
+D. All of the above
+● Answer: D
+● Explanation: Low-osmolarity ORS: Na+ 75, glucose 75, total osmolarity 245 mOsm/L (reduced from 311).
+
+66. Apart from diarrhea, oral rehydration solution has been employed in:
+A. Severe vomiting
+B. Burn cases
+C. Heat stroke
+D. Both (b) and (c)
+● Answer: D
+● Explanation: ORS is also used for fluid replacement in burns and heat stroke.
+
+67. The therapeutic effect of sulfasalazine in ulcerative colitis is exerted by:
+A. Inhibitory action of the unabsorbed drug on the abnormal colonic flora
+B. Breakdown of the drug in colon to release 5-aminosalicylic acid which suppresses inflammation locally
+C. Release of sulfapyridine having antibacterial property
+D. Systemic immunomodulatory action of the drug
+● Answer: B
+● Explanation: Sulfasalazine is cleaved by colonic bacteria to 5-ASA (active anti-inflammatory) and sulfapyridine (carrier).
+
+68. The preferred drug for controlling an acute exacerbation of ulcerative colitis is:
+A. Prednisolone
+B. Sulfasalazine
+C. Mesalazine
+D. Vancomycin
+● Answer: A
+● Explanation: Corticosteroids like prednisolone are first-line for acute severe exacerbations of UC.
+
+69. A small amount of atropine is added to diphenoxylate in order to:
+A. Suppress associated vomiting of gastroenteritis
+B. Augment the anti-motility action of diphenoxylate
+C. Block side effects of diphenoxylate
+D. Discourage overdose and abuse of diphenoxylate
+● Answer: D
+● Explanation: Atropine causes unpleasant anticholinergic effects at high doses, discouraging abuse of diphenoxylate.
+
+70. Choose the correct statement about the use of opioid anti-motility drugs in the management of diarrhea:
+A. They are used to control diarrhea irrespective of its etiology
+B. They should be used only as a short term measure after ensuring that enteroinvasive organisms are not involved
+C. They are used as adjuvant to antimicrobial therapy of diarrhea
+D. They are the drug of choice in irritable bowel syndrome diarrhea
+● Answer: B
+● Explanation: Antimotility drugs can worsen invasive diarrhea (e.g., Shigella, C. diff) by prolonging contact time.
+
+71. Aryan, a 14-year-old boy presented with chronic diarrhea and weight loss. History reveals that he has repeated attacks of respiratory tract infections with Pseudomonas aeruginosa. His younger brother died from a severe respiratory infection at the age of 7. Which of the following agents is most likely to improve this patient's condition?
+A. Octreotide
+B. Pancreatic lipase
+C. Metronidazole
+D. Loperamide
+● Answer: B
+● Explanation: The history suggests cystic fibrosis (recurrent Pseudomonas, pancreatic insufficiency). Pancreatic enzyme replacement is key.
+
+72. A 46-year-old male presents to OPD with diarrhea and abdominal pain. On investigations, it was found to be non-infective and you proceed with diphenoxylate therapy in this patient. Which of the following is the primary target for the drug you prescribed to this patient?
+A. Secretion
+B. Digestion
+C. Inflammation
+D. Motility
+● Answer: D
+● Explanation: Diphenoxylate is an opioid that reduces intestinal motility and secretion.
+
+73. Bisacodyl is: (UP 2007)
+A. Bulk forming
+B. Stool softner
+C. Stimulant purgative
+D. Osmotic purgative
+● Answer: C
+● Explanation: Bisacodyl is a stimulant laxative that increases intestinal motility.
+
+74. Sulfa drug used in inflammatory bowel disease includes: (TN 2008)
+A. Sulfasalazine
+B. Sulfamethoxazole
+C. Sulfinpyrazone
+D. Sulphadoxine
+● Answer: A
+● Explanation: Sulfasalazine is used in UC; 5-ASA is the active component.
+
+75. Best for treatment of irritable bowel syndrome with spastic colon is: (MH 2000)
+A. Liquid paraffin
+B. Senna
+C. Bisacodyl
+D. Dietary fibers
+● Answer: D
+● Explanation: Soluble fiber (psyllium) is first-line for IBS-C; it regulates bowel function without stimulation.
+
+76. Diarrhea (loose stools) is side effect of: (MH 2006)
+A. Omeprazole
+B. Sucralfate
+C. Metoclopramide
+D. Misoprostol
+● Answer: D
+● Explanation: Misoprostol commonly causes diarrhea due to increased intestinal secretion and motility.
+
+77. Not true about the composition of ORS:
+A. NaCl -3.5g (Kolkata 2005)
+B. KCl -1.5g
+C. Bicarbonate -2g
+D. Glucose -20g
+● Answer: B
+● Explanation: Standard ORS contains 1.5g KCl (correct), but low-osmolarity ORS uses citrate instead of bicarbonate.
+
+78. Which one of the drugs is useful in treating Crohn's disease? (Karnataka 2006)
+A. Infliximab
+B. Azathioprine
+C. Tacrolimus
+D. Cyclosporine
+● Answer: A
+● Explanation: Infliximab (anti-TNF) is effective for moderate-severe Crohn's disease.
+
+79. Drug useful in hepatic encephalopathy is:
+A. Magnesium sulphate (DPG 2005)
+B. Lactulose
+C. Bisacodyl
+D. Biphosphonates
+● Answer: B
+● Explanation: Lactulose reduces ammonia absorption and is first-line for hepatic encephalopathy.
+    </script>
+
+    <script>
+        // --- GEMINI API SETUP ---
+        let apiKey = localStorage.getItem('gemini_api_key') || ""; 
+
+        async function callGeminiAPI(userPrompt) {
+            // Exponential backoff retry logic
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            
+            for (let i = 0; i <= delays.length; i++) {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{ text: userPrompt }]
+                            }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429) { // Too Many Requests
+                            throw new Error('Rate limit exceeded');
+                        }
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response. Please try again.";
+
+                } catch (error) {
+                    if (i === delays.length) {
+                        console.error("All retries failed:", error);
+                        return "Sorry, the AI service is currently unavailable. Please check your internet connection or API Key.";
+                    }
+                    console.log(`Attempt ${i + 1} failed. Retrying in ${delays[i]}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+
+        // --- DATA PROCESSING ---
+        const rawText = document.getElementById('raw-data-source').innerText;
+        
+        function parseQuestions(text) {
+            // Split by lines that start with a number and a dot, e.g., "1. "
+            const parts = text.split(/\n(?=\d+\.\s)/);
+            
+            const questions = [];
+            let currentTopic = "Pharmacology - GI Drugs";
+
+            parts.forEach((part, index) => {
+                if(index === 0 && !part.match(/^\d+\./)) return; 
+
+                const qMatch = part.match(/^(\d+)\.\s+([\s\S]*?)(?=\n[A-Z]\.)/);
+                if (!qMatch) return;
+
+                const number = parseInt(qMatch[1]);
+                let qText = qMatch[2].trim();
+
+                const options = {};
+                const optionMatches = [...part.matchAll(/\n([A-Z])\.\s+([\s\S]*?)(?=\n[A-Z]\.|\n●|\n$)/g)];
+                optionMatches.forEach(match => {
+                    options[match[1]] = match[2].trim();
+                });
+
+                const ansMatch = part.match(/● Answer:\s*([A-D])(?:.*)/);
+                const correct = ansMatch ? ansMatch[1].trim().charAt(0) : '';
+
+                const expMatch = part.match(/● Explanation:\s*([\s\S]*?)$/);
+                const explanation = expMatch ? expMatch[1].trim() : "No explanation provided.";
+
+                const hasImage = qText.toLowerCase().includes("image below") || qText.toLowerCase().includes("following image");
+
+                questions.push({
+                    id: number,
+                    text: qText,
+                    options: options,
+                    correct: correct,
+                    explanation: explanation,
+                    topic: currentTopic,
+                    hasImage: hasImage
+                });
+            });
+
+            questions.forEach(q => {
+                q.topic = "Pharmacology - GI Drugs";
+            });
+
+            return questions;
+        }
+
+        const questions = parseQuestions(rawText);
+        
+        // --- APP STATE ---
+        let currentMode = 'practice';
+        let currentIndex = 0;
+        let answers = {};
+        let examSubmitted = false;
+
+        // --- DOM ELEMENTS ---
+        const qTextEl = document.getElementById('q-text');
+        const qNumberEl = document.getElementById('q-number');
+        const qTotalEl = document.getElementById('q-total');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
+        const explanationText = document.getElementById('explanation-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const topicBadge = document.getElementById('topic-badge');
+        const questionGrid = document.getElementById('question-grid');
+        const progressText = document.getElementById('progress-text');
+        const submitBtn = document.getElementById('submit-btn');
+        const scoreModal = document.getElementById('score-modal');
+        const imageContainer = document.getElementById('q-image-container');
+        const topicTabsContainer = document.getElementById('topic-tabs');
+        const resetQBtn = document.getElementById('reset-q-btn');
+        const appContainer = document.getElementById('app-container');
+        const submitBtnText = document.getElementById('submit-btn-text');
+        const aiModal = document.getElementById('ai-modal');
+        const aiChatContent = document.getElementById('ai-chat-content');
+        const aiUserInput = document.getElementById('ai-user-input');
+
+        // --- INITIALIZATION ---
+        function init() {
+            qTotalEl.innerText = questions.length;
+            renderSidebar();
+            renderTabs();
+            loadQuestion(0);
+            updateModeUI();
+        }
+
+        // --- AI TUTOR LOGIC ---
+        function saveApiKey() {
+            const input = document.getElementById('api-key-input');
+            const key = input.value.trim();
+            if (key) {
+                apiKey = key;
+                localStorage.setItem('gemini_api_key', key);
+                updateAiUiState();
+            }
+        }
+
+        function clearApiKey() {
+            if(!confirm("Are you sure you want to remove your API Key?")) return;
+            apiKey = "";
+            localStorage.removeItem('gemini_api_key');
+            updateAiUiState();
+        }
+
+        function updateAiUiState() {
+            const setupView = document.getElementById('ai-key-setup');
+            const chatView = document.getElementById('ai-chat-interface');
+            
+            if (!apiKey) {
+                setupView.classList.remove('hidden');
+                chatView.classList.add('hidden');
+            } else {
+                setupView.classList.add('hidden');
+                chatView.classList.remove('hidden');
+                // Initialize chat if empty
+                const content = document.getElementById('ai-chat-content');
+                if (content.children.length === 0) {
+                     addAiMessage('system', "Hi! I'm your pharmacology study assistant. How can I help you with this question?");
+                }
+            }
+        }
+
+        function openAiTutor() {
+            document.getElementById('ai-modal').classList.remove('hidden');
+            updateAiUiState();
+        }
+
+        function closeAiTutor() {
+            document.getElementById('ai-modal').classList.add('hidden');
+        }
+
+        function addAiMessage(role, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = "flex gap-3 fade-in";
+            
+            if (role === 'user') {
+                msgDiv.innerHTML = `
+                    <div class="ml-auto bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none text-sm shadow-sm max-w-[85%]">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                // AI Message with Markdown-ish parsing
+                let formattedText = text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                    .replace(/\n/g, '<br>'); // Line breaks
+
+                msgDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex-shrink-0 flex items-center justify-center text-white text-xs">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 text-sm text-slate-700 shadow-sm max-w-[90%] ai-response">
+                        ${formattedText}
+                    </div>
+                `;
+            }
+            aiChatContent.appendChild(msgDiv);
+            aiChatContent.scrollTop = aiChatContent.scrollHeight;
+        }
+
+        function showLoading() {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'ai-loading';
+            loadingDiv.className = "flex gap-3 fade-in";
+            loadingDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex-shrink-0 flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-200 shadow-sm flex gap-1">
+                    <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                </div>
+            `;
+            aiChatContent.appendChild(loadingDiv);
+            aiChatContent.scrollTop = aiChatContent.scrollHeight;
+        }
+
+        function removeLoading() {
+            const loadingDiv = document.getElementById('ai-loading');
+            if (loadingDiv) loadingDiv.remove();
+        }
+
+        async function sendAiPrompt(customText = null) {
+            const text = customText || aiUserInput.value.trim();
+            if (!text) return;
+
+            // Clear input if manual
+            if(!customText) aiUserInput.value = '';
+
+            addAiMessage('user', text);
+            showLoading();
+
+            const q = questions[currentIndex];
+            const context = `
+Context: Pharmacology Exam Question (Anti-ulcer drugs, Prokinetics, Antiemetics, Laxatives)
+Question: ${q.text}
+Options:
+${Object.entries(q.options).map(([k,v]) => `${k}. ${v}`).join('\n')}
+Correct Answer: ${q.correct}
+Provided Explanation: ${q.explanation}
+
+Student Query: ${text}
+
+Instructions: Be concise, encouraging, and accurate. Use simple language. Focus on mechanism of action, clinical use, and side effects.
+`;
+
+            const response = await callGeminiAPI(context);
+            removeLoading();
+            addAiMessage('ai', response);
+        }
+
+        function handleAiSubmit() {
+            sendAiPrompt();
+        }
+
+        // Allow 'Enter' key in AI input
+        aiUserInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleAiSubmit();
+        });
+
+
+        // --- FLOW CONTROL ---
+
+        function switchMode(mode) {
+            if (currentMode === mode) return;
+            if (mode === 'exam') {
+                if (!confirm("Switching to Exam Mode will reset your current progress. Continue?")) return;
+                resetExam();
+            }
+            currentMode = mode;
+            updateModeUI();
+            loadQuestion(currentIndex); 
+        }
+
+        function updateModeUI() {
+            const practiceBtn = document.getElementById('mode-practice');
+            const examBtn = document.getElementById('mode-exam');
+            
+            if (currentMode === 'practice') {
+                practiceBtn.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+                practiceBtn.classList.remove('text-indigo-100', 'hover:bg-white/10');
+                
+                examBtn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+                examBtn.classList.add('text-indigo-100', 'hover:bg-white/10');
+                
+                resetQBtn.classList.remove('hidden');
+                submitBtnText.innerText = "Finish";
+            } else {
+                examBtn.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+                examBtn.classList.remove('text-indigo-100', 'hover:bg-white/10');
+                
+                practiceBtn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+                practiceBtn.classList.add('text-indigo-100', 'hover:bg-white/10');
+                
+                resetQBtn.classList.add('hidden');
+                submitBtnText.innerText = "Submit";
+            }
+        }
+
+        function renderTabs() {
+            const topics = {};
+            questions.forEach((q, index) => {
+                if (!topics[q.topic]) {
+                    topics[q.topic] = index;
+                }
+            });
+
+            topicTabsContainer.innerHTML = '';
+            Object.entries(topics).forEach(([topic, startIndex]) => {
+                const btn = document.createElement('button');
+                btn.id = `tab-${topic.replace(/\s+/g, '-')}`;
+                btn.className = 'px-4 py-2 text-sm font-medium rounded-full transition-all whitespace-nowrap tab-inactive hover:bg-slate-100';
+                btn.innerText = topic;
+                btn.onclick = () => {
+                    loadQuestion(startIndex);
+                };
+                topicTabsContainer.appendChild(btn);
+            });
+        }
+
+        function updateActiveTab(currentTopic) {
+             const allTabs = topicTabsContainer.children;
+             for (let tab of allTabs) {
+                 tab.classList.remove('tab-active');
+                 tab.classList.add('tab-inactive');
+             }
+             const activeTab = document.getElementById(`tab-${currentTopic.replace(/\s+/g, '-')}`);
+             if(activeTab) {
+                 activeTab.classList.remove('tab-inactive');
+                 activeTab.classList.add('tab-active');
+                 activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+             }
+        }
+
+        function resetQuestion() {
+            if (currentMode !== 'practice') return;
+            delete answers[currentIndex];
+            loadQuestion(currentIndex);
+            updateSidebarItem(currentIndex);
+        }
+
+        function loadQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            currentIndex = index;
+            const q = questions[index];
+
+            // UI Updates
+            qNumberEl.innerText = index + 1;
+            qTextEl.innerText = q.text;
+            topicBadge.innerText = q.topic;
+            updateActiveTab(q.topic);
+            
+            // Image handling
+            if(q.hasImage) {
+                imageContainer.classList.remove('hidden');
+            } else {
+                imageContainer.classList.add('hidden');
+            }
+
+            // Options generation using Divs for better mobile tap handling
+            optionsContainer.innerHTML = '';
+            Object.entries(q.options).forEach(([key, value]) => {
+                const btn = document.createElement('div');
+                btn.className = `option-card p-4 md:p-5 rounded-xl border border-slate-200 cursor-pointer flex items-start gap-4 hover:border-indigo-300 hover:bg-indigo-50/50 bg-white group transition-all`;
+                btn.id = `opt-${key}`;
+                btn.onclick = () => handleOptionClick(index, key); // Direct JS handling for responsiveness
+
+                // UI Content
+                const letterBox = document.createElement('div');
+                letterBox.className = "flex-none w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-colors option-letter shadow-sm text-sm";
+                letterBox.innerText = key;
+                
+                const textBox = document.createElement('div');
+                textBox.className = "pt-1 text-slate-700 font-medium group-hover:text-slate-900 text-sm md:text-base";
+                textBox.innerText = value;
+
+                btn.appendChild(letterBox);
+                btn.appendChild(textBox);
+                
+                optionsContainer.appendChild(btn);
+            });
+
+            // State restoration
+            const userAns = answers[index];
+            if (userAns) {
+                if (currentMode === 'practice' || examSubmitted) {
+                    showFeedback(index, userAns);
+                } else {
+                    highlightSelected(userAns);
+                }
+            } else {
+                explanationBox.classList.add('hidden');
+            }
+
+            // Navigation State
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === questions.length - 1;
+
+            // Scroll sidebar
+            const activeGridItem = document.getElementById(`grid-item-${index}`);
+            if(activeGridItem) activeGridItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            updateSidebarActiveState();
+        }
+
+        function handleOptionClick(qIndex, selectedOption) {
+            if (examSubmitted) return; 
+            if (currentMode === 'practice' && answers[qIndex]) return; 
+
+            answers[qIndex] = selectedOption;
+            
+            if (currentMode === 'practice') {
+                showFeedback(qIndex, selectedOption);
+            } else {
+                highlightSelected(selectedOption);
+            }
+            
+            updateSidebarItem(qIndex);
+        }
+
+        function highlightSelected(selectedOption) {
+            // Reset all
+            document.querySelectorAll('.option-card').forEach(el => {
+                el.classList.remove('selected-neutral', 'bg-blue-50', 'border-blue-500');
+                el.querySelector('.option-letter').classList.remove('bg-indigo-600', 'text-white');
+            });
+            // Highlight selected
+            const selEl = document.getElementById(`opt-${selectedOption}`);
+            if (selEl) {
+                selEl.classList.add('selected-neutral');
+                selEl.querySelector('.option-letter').classList.add('bg-indigo-600', 'text-white');
+            }
+        }
+
+        function showFeedback(qIndex, userOption) {
+            const q = questions[qIndex];
+            const correctOption = q.correct;
+            const isCorrect = userOption === correctOption;
+
+            // Highlight Options
+            document.querySelectorAll('.option-card').forEach(el => {
+                const optKey = el.id.split('-')[1];
+                el.classList.remove('hover:border-indigo-300', 'hover:bg-indigo-50/50', 'cursor-pointer', 'group');
+                el.onclick = null; // Disable subsequent clicks
+
+                if (optKey === correctOption) {
+                    el.classList.add('correct-answer');
+                    el.querySelector('.option-letter').classList.add('bg-emerald-600', 'text-white');
+                    // Add Icon
+                    if(!el.querySelector('.fa-check-circle')) {
+                        const icon = document.createElement('i');
+                        icon.className = "fas fa-check-circle text-emerald-600 text-xl ml-auto self-center";
+                        el.appendChild(icon);
+                    }
+                } else if (optKey === userOption && !isCorrect) {
+                    el.classList.add('wrong-answer');
+                    el.querySelector('.option-letter').classList.add('bg-rose-500', 'text-white');
+                    if(!el.querySelector('.fa-times-circle')) {
+                        const icon = document.createElement('i');
+                        icon.className = "fas fa-times-circle text-rose-500 text-xl ml-auto self-center";
+                        el.appendChild(icon);
+                    }
+                } else {
+                    el.classList.add('opacity-40');
+                }
+            });
+
+            // Show Explanation
+            explanationText.innerHTML = q.explanation;
+            explanationBox.classList.remove('hidden');
+        }
+
+        function renderSidebar() {
+            questionGrid.innerHTML = '';
+            questions.forEach((q, i) => {
+                const btn = document.createElement('button');
+                btn.id = `grid-item-${i}`;
+                btn.className = `h-8 w-full rounded flex items-center justify-center text-xs font-semibold border border-transparent hover:bg-white hover:shadow-sm transition-all`;
+                btn.innerText = i + 1;
+                btn.onclick = () => {
+                    loadQuestion(i);
+                    if(window.innerWidth < 1024) {
+                        document.getElementById('sidebar').classList.add('-translate-x-full');
+                        document.getElementById('sidebar-overlay').classList.add('hidden');
+                    }
+                };
+                questionGrid.appendChild(btn);
+            });
+        }
+
+        function updateSidebarItem(index) {
+            const btn = document.getElementById(`grid-item-${index}`);
+            const userAns = answers[index];
+            const q = questions[index];
+            
+            btn.className = `h-8 w-full rounded flex items-center justify-center text-xs font-semibold border transition-all`;
+
+            if (!userAns) {
+                btn.classList.add('bg-white', 'border-slate-200', 'text-slate-600', 'shadow-sm');
+            } else if (currentMode === 'practice' || examSubmitted) {
+                if (userAns === q.correct) {
+                    btn.classList.add('bg-emerald-500', 'border-emerald-600', 'text-white', 'shadow-sm');
+                } else {
+                    btn.classList.add('bg-rose-500', 'border-rose-600', 'text-white', 'shadow-sm');
+                }
+            } else {
+                btn.classList.add('bg-blue-500', 'border-blue-600', 'text-white', 'shadow-sm');
+            }
+
+            const answeredCount = Object.keys(answers).length;
+            progressText.innerText = `${answeredCount}/${questions.length}`;
+        }
+
+        function updateSidebarActiveState() {
+             questions.forEach((_, i) => {
+                const btn = document.getElementById(`grid-item-${i}`);
+                if (i === currentIndex) {
+                    btn.classList.add('ring-2', 'ring-offset-1', 'ring-indigo-500', 'scale-110');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-offset-1', 'ring-indigo-500', 'scale-110');
+                }
+            });
+        }
+
+        function resetExam() {
+            answers = {};
+            examSubmitted = false;
+            currentIndex = 0;
+            scoreModal.classList.add('hidden');
+            questions.forEach((_, i) => updateSidebarItem(i));
+            loadQuestion(0);
+        }
+
+        function submitExam() {
+            if (!confirm(currentMode === 'practice' ? "Finish practice session?" : "Are you sure you want to submit? You cannot change answers afterwards.")) return;
+            
+            examSubmitted = true;
+            let correctCount = 0;
+            
+            questions.forEach((q, i) => {
+                const userAns = answers[i];
+                if (userAns === q.correct) correctCount++;
+                updateSidebarItem(i); 
+            });
+
+            const percent = Math.round((correctCount / questions.length) * 100);
+            
+            document.getElementById('score-percent').innerText = `${percent}%`;
+            document.getElementById('score-percent').className = `text-4xl font-black ${percent >= 50 ? 'text-emerald-600' : 'text-rose-600'}`;
+            document.getElementById('score-fraction').innerText = `${correctCount}/${questions.length}`;
+            
+            scoreModal.classList.remove('hidden');
+        }
+
+        function reviewExam() {
+            scoreModal.classList.add('hidden');
+            loadQuestion(0);
+        }
+
+        // --- EVENT LISTENERS ---
+        document.getElementById('prev-btn').onclick = () => loadQuestion(currentIndex - 1);
+        document.getElementById('next-btn').onclick = () => loadQuestion(currentIndex + 1);
+        
+        document.getElementById('mode-practice').onclick = () => switchMode('practice');
+        document.getElementById('mode-exam').onclick = () => switchMode('exam');
+        document.getElementById('submit-btn').onclick = submitExam;
+        document.getElementById('reset-q-btn').onclick = resetQuestion;
+
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        menuBtn.onclick = () => {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        };
+
+        overlay.onclick = () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        };
+
+        document.addEventListener('keydown', (e) => {
+            // Prevent arrow navigation if user is typing in form
+            if(document.activeElement.tagName === 'INPUT') return;
+            
+            if (e.key === 'ArrowRight') loadQuestion(currentIndex + 1);
+            if (e.key === 'ArrowLeft') loadQuestion(currentIndex - 1);
+        });
+
+        // Run
+        init();
+
+    </script>
+</body>
+</html>
